@@ -21,10 +21,12 @@ class _AuthButtonState extends State<AuthButton> {
           List<BiometricType> availableBiometrics =
               await _authService.getAvailableBiometrics();
 
-          if (availableBiometrics.contains(BiometricType.fingerprint) ||
-              availableBiometrics.contains(BiometricType.face)) {
+          debugPrint("biometrics ${availableBiometrics.length}");
+
+          if (availableBiometrics.isNotEmpty) {
             bool isAuthenticated =
                 await _authService.authenticateWithBiometrics();
+            print(isAuthenticated);
 
             if (isAuthenticated) {
               // User successfully authenticated
